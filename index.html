@@ -1,147 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idan Drutz | Roblox Developer</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background-color: #0f172a; /* Slate 900 */
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#3b82f6',
+                            purple: '#a855f7',
+                            darkBg: '#0b0f19',
+                        }
+                    }
+                }
+            }
         }
-    </style>
+    </script>
 </head>
-<body class="text-slate-200 font-sans antialiased">
+<body class="bg-brand-darkBg text-slate-200 font-sans antialiased selection:bg-purple-500/30 selection:text-white">
 
-    <!-- Header Section -->
-    <header class="max-w-5xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div>
-            <h1 class="text-4xl font-extrabold text-white tracking-tight">Idan Drutz</h1>
-            <p class="text-lg text-blue-400 font-medium mt-1">Roblox Developer & Programmer</p>
+    <!-- Subtle Glowing Background Accents -->
+    <div class="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-purple-500/10 blur-[120px] pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-brand-darkBg/80 border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="font-bold text-white text-lg tracking-wide hover:text-blue-400 transition">IDAN DRUTZ</a>
+            <div class="flex items-center gap-6 text-sm font-medium">
+                <a href="#about" class="text-slate-400 hover:text-white transition">About</a>
+                <a href="#projects" class="text-slate-400 hover:text-white transition">My Work</a>
+                <a href="#contact" class="text-slate-400 hover:text-white transition">Connect</a>
+            </div>
         </div>
-        <div class="flex gap-3">
-            <a href="https://discord.gg/VfwEVsj3mE" target="_blank" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold text-sm transition shadow-lg">Discord</a>
-            <a href="https://www.youtube.com/@Devstroyer3000" target="_blank" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold text-sm transition shadow-lg">YouTube</a>
+    </nav>
+
+    <!-- Hero / Header Section -->
+    <header id="about" class="max-w-5xl mx-auto px-6 pt-20 pb-12 text-center md:text-left md:flex md:items-center md:justify-between gap-12">
+        <div class="max-w-2xl">
+            <!-- Online Indicator -->
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-6">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                Active Daily & Responsive
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                Idan Drutz
+            </h1>
+            <p class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent mt-2">
+                Roblox Developer & Programmer
+            </p>
+            <p class="text-slate-300 leading-relaxed text-lg mt-6">
+                I build immersive gameplay systems, physics mechanics, and custom game development tools on Roblox. 
+                My development stack is built around <strong class="text-blue-400 font-semibold">Luau</strong>, <strong class="text-blue-400 font-semibold">Python</strong>, and <strong class="text-blue-400 font-semibold">C#</strong>. 
+                When I am not coding frameworks, I design custom VFX and animations to make interactions feel incredibly responsive.
+            </p>
+        </div>
+        
+        <!-- Interactive Quick Contact Card -->
+        <div class="mt-8 md:mt-0 p-6 bg-slate-900/40 border border-slate-800 rounded-2xl md:w-80 backdrop-blur-sm shadow-2xl flex flex-col gap-4">
+            <h3 class="font-bold text-white text-md">Direct Channels</h3>
+            
+            <a href="https://discord.gg/VfwEVsj3mE" target="_blank" class="flex items-center justify-between p-3 bg-indigo-600/10 border border-indigo-500/20 hover:bg-indigo-600/20 rounded-xl transition group">
+                <span class="text-sm font-semibold text-indigo-400 group-hover:text-indigo-300">Join Discord Server</span>
+                <span class="text-lg">&rarr;</span>
+            </a>
+
+            <button onclick="copyDiscordHandle()" class="relative flex items-center justify-between p-3 bg-slate-800/40 border border-slate-700/30 hover:bg-slate-800/80 rounded-xl transition text-left group">
+                <div>
+                    <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Discord Handle</p>
+                    <p class="text-sm font-semibold text-slate-300">idandrutz_mrrandom</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span id="copy-text" class="text-xs text-slate-400 bg-slate-800 px-2 py-1 rounded hidden transition-all">Copied!</span>
+                    <svg class="w-5 h-5 text-slate-400 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+                </div>
+            </button>
+
+            <a href="https://www.youtube.com/@Devstroyer3000" target="_blank" class="flex items-center justify-between p-3 bg-red-600/10 border border-red-500/20 hover:bg-red-600/20 rounded-xl transition group">
+                <span class="text-sm font-semibold text-red-400 group-hover:text-red-300">YouTube Channel</span>
+                <span class="text-lg">&rarr;</span>
+            </a>
         </div>
     </header>
 
-    <!-- Bio Section -->
-    <section class="max-w-5xl mx-auto px-6 py-8">
-        <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8 backdrop-blur-sm">
-            <h2 class="text-2xl font-bold text-white mb-4">About Me</h2>
-            <p class="text-slate-300 leading-relaxed text-lg">
-                I build games on Roblox, specializing in gameplay systems, mechanics, and tool development. 
-                My core programming stack includes <strong class="text-blue-400">Luau</strong>, <strong class="text-blue-400">Python</strong>, and <strong class="text-blue-400">C#</strong>. 
-                In addition, I create custom animations and VFX to bring game mechanics to life.
-            </p>
-            <div class="mt-6 flex items-center gap-2 text-emerald-400 text-sm font-medium">
-                <span class="relative flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                </span>
-                Active daily & responsive to inquiries, updates, and collaborations.
-            </div>
-        </div>
-    </section>
-
     <!-- Skills Section -->
-    <section class="max-w-5xl mx-auto px-6 py-8">
-        <h2 class="text-2xl font-bold text-white mb-6">Skills & Tech Stack</h2>
+    <section class="max-w-5xl mx-auto px-6 py-12">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Programming -->
-            <div class="p-6 bg-slate-800/30 border border-slate-700/40 rounded-xl">
-                <h3 class="font-bold text-lg text-white mb-3">Programming</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-slate-700 text-slate-200 rounded text-sm font-semibold">Luau</span>
-                    <span class="px-3 py-1 bg-slate-700 text-slate-200 rounded text-sm font-semibold">Python</span>
-                    <span class="px-3 py-1 bg-slate-700 text-slate-200 rounded text-sm font-semibold">C#</span>
-                </div>
+            <div class="p-6 bg-slate-900/30 border border-slate-800/80 rounded-xl hover:border-blue-500/30 transition duration-300">
+                <div class="h-10 w-10 bg-blue-500/10 text-blue-400 flex items-center justify-center rounded-lg mb-4 font-bold">💻</div>
+                <h3 class="font-bold text-lg text-white mb-2">Systems Engineering</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Luau frameworks, strict typing, optimizing server-to-client replication, and writing modular architecture.</p>
             </div>
-            <!-- Roblox Dev -->
-            <div class="p-6 bg-slate-800/30 border border-slate-700/40 rounded-xl">
-                <h3 class="font-bold text-lg text-white mb-3">Roblox Development</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-slate-700 text-slate-200 rounded text-sm font-semibold">Roblox Studio</span>
-                    <span class="px-3 py-1 bg-slate-700 text-slate-200 rounded text-sm font-semibold">Gameplay Systems</span>
-                    <span class="px-3 py-1 bg-slate-700 text-slate-200 rounded text-sm font-semibold">Custom Frameworks</span>
-                </div>
+            <div class="p-6 bg-slate-900/30 border border-slate-800/80 rounded-xl hover:border-purple-500/30 transition duration-300">
+                <div class="h-10 w-10 bg-purple-500/10 text-purple-400 flex items-center justify-center rounded-lg mb-4 font-bold">🛠️</div>
+                <h3 class="font-bold text-lg text-white mb-2">Roblox Tooling</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Developing editor plugins, desktop integrations, custom game state routers, and automation shortcuts.</p>
             </div>
-            <!-- Creative -->
-            <div class="p-6 bg-slate-800/30 border border-slate-700/40 rounded-xl">
-                <h3 class="font-bold text-lg text-white mb-3">Creative Art</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-slate-700 text-slate-200 rounded text-sm font-semibold">VFX</span>
-                    <span class="px-3 py-1 bg-slate-700 text-slate-200 rounded text-sm font-semibold">Animation</span>
-                </div>
-                <p class="text-xs text-slate-500 mt-3 italic">And nothing more! 🎬</p>
+            <div class="p-6 bg-slate-900/30 border border-slate-800/80 rounded-xl hover:border-indigo-500/30 transition duration-300">
+                <div class="h-10 w-10 bg-indigo-500/10 text-indigo-400 flex items-center justify-center rounded-lg mb-4 font-bold">✨</div>
+                <h3 class="font-bold text-lg text-white mb-2">VFX & Animation</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Custom emitter particle layouts, keyframe animation sequences, and visual effects implementation.</p>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="max-w-5xl mx-auto px-6 py-8">
-        <h2 class="text-2xl font-bold text-white mb-6">Selected Projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Showcase and Interactive Portfolio Section -->
+    <section id="projects" class="max-w-5xl mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+                <h2 class="text-3xl font-extrabold text-white tracking-tight">Project Portfolio</h2>
+                <p class="text-slate-400 mt-1">Explore my frameworks, workflow integrations, and creative work.</p>
+            </div>
             
-            <!-- UniFramework -->
-            <div class="p-6 bg-slate-800/40 border border-slate-700/50 rounded-xl flex flex-col justify-between hover:border-blue-500/50 transition">
+            <!-- Category Filtering Tabs (Interactive) -->
+            <div class="flex bg-slate-900/80 border border-slate-800 p-1.5 rounded-xl gap-1 self-start md:self-auto text-sm font-medium">
+                <button onclick="filterCategory('all')" id="tab-all" class="px-4 py-2 rounded-lg bg-slate-800 text-white transition duration-200">All</button>
+                <button onclick="filterCategory('framework')" id="tab-framework" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition duration-200">Frameworks</button>
+                <button onclick="filterCategory('tool')" id="tab-tool" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition duration-200">Tools</button>
+                <button onclick="filterCategory('creative')" id="tab-creative" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition duration-200">VFX & Art</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
+            
+            <!-- Project 1: UniFramework (Framework) -->
+            <div class="project-card flex flex-col justify-between bg-slate-900/20 border border-slate-800/80 rounded-2xl overflow-hidden hover:border-blue-500/40 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(59,130,246,0.05)] transition-all duration-300" data-category="framework">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-2">UniFramework</h3>
-                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
-                        A Framework that allows for secure client prediction and server authoritative communication while staying optimized and easy to use.
-                    </p>
-                    <div class="mb-4">
-                        <span class="text-xs font-semibold text-slate-400">Tech Stack:</span>
-                        <span class="text-xs text-blue-400">Luau, Roblox Studio</span>
+                    <!-- Replace src with your screenshot or GIF later -->
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="UniFramework visual placeholder" class="w-full h-48 object-cover opacity-80 border-b border-slate-800" />
+                    <div class="p-6">
+                        <span class="px-2.5 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold rounded-md uppercase tracking-wider">Framework</span>
+                        <h3 class="text-2xl font-bold text-white mt-3 mb-2">UniFramework</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            A fast, optimized architecture allowing for secure client prediction and authoritative communication. Simplifies high-efficiency networking tasks with clean event hooks.
+                        </p>
                     </div>
                 </div>
-                <a href="https://github.com/idandrutz-MrRandom/UniFramework-AnythingFramework" target="_blank" class="inline-flex items-center text-sm font-semibold text-blue-400 hover:underline gap-1">
-                    View on GitHub &rarr;
-                </a>
+                <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-slate-800/50">
+                    <span class="text-xs text-slate-500 font-mono">Luau • Roblox Studio</span>
+                    <a href="https://github.com/idandrutz-MrRandom/UniFramework-AnythingFramework" target="_blank" class="text-sm font-semibold text-blue-400 hover:text-blue-300 transition inline-flex items-center gap-1">
+                        View Repository &rarr;
+                    </a>
+                </div>
             </div>
 
-            <!-- Roblox Shortcuts -->
-            <div class="p-6 bg-slate-800/40 border border-slate-700/50 rounded-xl flex flex-col justify-between hover:border-blue-500/50 transition">
+            <!-- Project 2: Strictify (Framework / Plugin) -->
+            <div class="project-card flex flex-col justify-between bg-slate-900/20 border border-slate-800/80 rounded-2xl overflow-hidden hover:border-purple-500/40 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,85,247,0.05)] transition-all duration-300" data-category="framework">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-2">Roblox Shortcuts</h3>
-                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
-                        Allows you to easily create desktop shortcuts for Roblox games using customized links.
-                    </p>
-                    <div class="mb-4">
-                        <span class="text-xs font-semibold text-slate-400">Tech Stack:</span>
-                        <span class="text-xs text-blue-400">Luau, Roblox Studio</span>
+                    <!-- Replace src with your screenshot or GIF later -->
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Strictify visual placeholder" class="w-full h-48 object-cover opacity-80 border-b border-slate-800" />
+                    <div class="p-6">
+                        <span class="px-2.5 py-1 bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold rounded-md uppercase tracking-wider">Roblox Plugin</span>
+                        <h3 class="text-2xl font-bold text-white mt-3 mb-2">Strictify</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            An editor plugin designed to automatically implement type assertions and strict typechecking into scripts utilizing background AI processing via HttpService.
+                        </p>
                     </div>
                 </div>
-                <a href="https://github.com/idandrutz-MrRandom/roblox-Shortcuts" target="_blank" class="inline-flex items-center text-sm font-semibold text-blue-400 hover:underline gap-1">
-                    View on GitHub &rarr;
-                </a>
+                <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-slate-800/50">
+                    <span class="text-xs text-slate-500 font-mono">Luau • HttpService</span>
+                    <a href="https://github.com/idandrutz-MrRandom/Strictify" target="_blank" class="text-sm font-semibold text-purple-400 hover:text-purple-300 transition inline-flex items-center gap-1">
+                        View Repository &rarr;
+                    </a>
+                </div>
             </div>
 
-            <!-- Strictify -->
-            <div class="p-6 bg-slate-800/40 border border-slate-700/50 rounded-xl flex flex-col justify-between hover:border-blue-500/50 transition md:col-span-2">
+            <!-- Project 3: Roblox Shortcuts (Tool) -->
+            <div class="project-card flex flex-col justify-between bg-slate-900/20 border border-slate-800/80 rounded-2xl overflow-hidden hover:border-indigo-500/40 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(99,102,241,0.05)] transition-all duration-300" data-category="tool">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-2">Strictify</h3>
-                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
-                        A plugin that integrates artificial intelligence using Roblox's HttpService to automatically add strict typechecking to your codebase as you write.
-                    </p>
-                    <div class="mb-4">
-                        <span class="text-xs font-semibold text-slate-400">Tech Stack:</span>
-                        <span class="text-xs text-blue-400">Luau (HttpService)</span>
+                    <!-- Replace src with your screenshot or GIF later -->
+                    <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=800&q=80" alt="Shortcuts visual placeholder" class="w-full h-48 object-cover opacity-80 border-b border-slate-800" />
+                    <div class="p-6">
+                        <span class="px-2.5 py-1 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold rounded-md uppercase tracking-wider">Utility / Desktop Tool</span>
+                        <h3 class="text-2xl font-bold text-white mt-3 mb-2">Roblox Shortcuts</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            A lightweight pipeline enabling direct local execution links for target Roblox places, generating desktop integration shortcuts natively.
+                        </p>
                     </div>
                 </div>
-                <a href="https://github.com/idandrutz-MrRandom/Strictify" target="_blank" class="inline-flex items-center text-sm font-semibold text-blue-400 hover:underline gap-1">
-                    View on GitHub &rarr;
-                </a>
+                <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-slate-800/50">
+                    <span class="text-xs text-slate-500 font-mono">Python • Windows Registry</span>
+                    <a href="https://github.com/idandrutz-MrRandom/roblox-Shortcuts" target="_blank" class="text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition inline-flex items-center gap-1">
+                        View Repository &rarr;
+                    </a>
+                </div>
             </div>
 
+            <!-- Project 4: Animations & VFX (Creative) -->
+            <div class="project-card flex flex-col justify-between bg-slate-900/20 border border-slate-800/80 rounded-2xl overflow-hidden hover:border-rose-500/40 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(244,63,94,0.05)] transition-all duration-300" data-category="creative">
+                <div>
+                    <!-- Replace src with custom game GIF / showcase asset later -->
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800&q=80" alt="VFX visual placeholder" class="w-full h-48 object-cover opacity-80 border-b border-slate-800" />
+                    <div class="p-6">
+                        <span class="px-2.5 py-1 bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold rounded-md uppercase tracking-wider">Creative Art</span>
+                        <h3 class="text-2xl font-bold text-white mt-3 mb-2">VFX & Animations</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            In-game spatial assets utilizing system structures, particle physics, and stylized skeletal mechanics for explosive reactions and attacks.
+                        </p>
+                    </div>
+                </div>
+                <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-slate-800/50">
+                    <span class="text-xs text-slate-500 font-mono">Roblox Studio • Blender</span>
+                    <a href="https://www.youtube.com/@Devstroyer3000" target="_blank" class="text-sm font-semibold text-rose-400 hover:text-rose-300 transition inline-flex items-center gap-1">
+                        View Showcase &rarr;
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Connect / Contact CTA -->
+    <section id="contact" class="max-w-5xl mx-auto px-6 py-20">
+        <div class="bg-gradient-to-br from-slate-900 to-brand-darkBg border border-slate-800 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-blue-500/5 blur-[80px] pointer-events-none"></div>
+            
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">Start a Project Together</h2>
+            <p class="text-slate-400 max-w-lg mx-auto text-sm md:text-base leading-relaxed mb-8">
+                Looking to build custom systems, optimize an existing game framework, or add responsive visual VFX to your Roblox environment? I'm available for work.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://discord.gg/VfwEVsj3mE" target="_blank" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold text-sm transition-all hover:shadow-[0_0_20px_rgba(79,70,229,0.4)]">
+                    Join my Discord Server
+                </a>
+                <button onclick="copyDiscordHandle()" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl font-bold text-sm transition-all flex items-center gap-2">
+                    Copy Handle: <span class="text-blue-400">idandrutz_mrrandom</span>
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="max-w-5xl mx-auto px-6 py-12 border-t border-slate-800 text-center text-xs text-slate-500">
-        <p>© 2026 Idan Drutz. All rights reserved.</p>
-    </footer>
-
-</body>
-</html>
+    <footer class="max-w-5xl mx-auto px-6 py-12 border-t border-slate-900/80 text-center text-xs text-slate-5
