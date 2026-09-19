@@ -193,13 +193,10 @@ html:not(.js) .preloader { display: none; }
 .tile:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
 
 /* what I build */
-.build li { display: flex; align-items: center; gap: 22px; padding: 20px 0; border-top: 1px solid var(--line); cursor: default; transition: transform .6s var(--ease), color .3s; }
+.build li { display: flex; align-items: center; gap: 22px; padding: 20px 0; border-top: 1px solid var(--line); cursor: default; }
 .build li:first-child { border-top: 0; padding-top: 4px; }
-.build li:hover { transform: translateX(10px); }
 .build svg { width: 46px; height: 46px; flex: none; fill: none; stroke: var(--accent); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; padding: 9px; border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: calc(var(--r) * .55); box-sizing: content-box; }
 .build span { flex: 1; font-family: var(--serif); font-weight: 350; font-size: clamp(1.7rem, 3.4vw, 2.6rem); line-height: 1.1; letter-spacing: -.02em; }
-.build i { font-style: normal; color: var(--accent2); opacity: 0; transform: translateX(-10px); transition: opacity .3s, transform .5s var(--ease); font-size: 1.4rem; }
-.build li:hover i { opacity: 1; transform: none; }
 html.js .build svg * { stroke-dasharray: 1; stroke-dashoffset: 1; }
 html.js .tile.in .build svg * { animation: draw 1.6s var(--ease) forwards; }
 html.js .build li:nth-child(2) svg * { animation-delay: .15s !important; }
