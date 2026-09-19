@@ -1,0 +1,3 @@
+luau-web 1.4.0 (https://github.com/xNasuni/luau-web), MIT licence.
+Real Luau compiled to WebAssembly, vendored here so the playground doesn't depend on a CDN.
+Luau itself: https://github.com/luau-lang/luau (MIT).

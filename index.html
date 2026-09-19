@@ -1,267 +1,360 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idan Drutz | Roblox Developer</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#080c14',
-                            card: '#0f1422',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idan Drutz | Roblox Developer</title>
+  <meta name="theme-color" content="#0b120d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
-<body class="bg-brand-dark text-slate-300 font-sans antialiased selection:bg-blue-500/30 selection:text-white">
+<body>
 
-    <!-- Header / Navbar -->
-    <nav class="border-b border-slate-900/80 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-            <span class="font-mono text-sm tracking-widest text-slate-400">&lt;IDAN_DRUTZ /&gt;</span>
-            <div class="flex items-center gap-6 text-sm font-mono">
-                <a href="#about" class="text-slate-400 hover:text-white transition duration-200">about</a>
-                <a href="#projects" class="text-slate-400 hover:text-white transition duration-200">projects</a>
-                <a href="#contact" class="text-slate-400 hover:text-white transition duration-200">contact</a>
-            </div>
+  <!-- Intro -->
+  <div class="preloader" aria-hidden="true"><span>Idan Drutz</span></div>
+
+  <!-- Scroll progress + cursor ring -->
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <!--
+    Dual-theme background. Two fixed video layers:
+      assets/nature.mp4  -> visible at the top of the page
+      assets/cyber.mp4   -> fades in over it as you scroll through the bridge section
+    Each has a built-in animated fallback so the theme still shows without the files.
+  -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg__nature">
+      <div class="bg__fallback"><i></i><i></i><i></i></div>
+      <video class="bg__video" autoplay muted loop playsinline preload="auto">
+        <source src="assets/nature.mp4" type="video/mp4">
+        <source src="assets/nature.webm" type="video/webm">
+      </video>
+    </div>
+    <div class="bg__cyber" id="cyberLayer">
+      <div class="cyb"><div class="cyb__grid"></div></div>
+      <video class="bg__video" autoplay muted loop playsinline preload="auto">
+        <source src="assets/cyber.mp4" type="video/mp4">
+        <source src="assets/cyber.webm" type="video/webm">
+      </video>
+    </div>
+    <canvas id="fx"></canvas>
+    <div class="bg__overlay" id="bgOverlay"></div>
+    <div class="bg__scan"></div>
+    <div class="bg__vignette"></div>
+  </div>
+
+  <!-- Header / Navbar -->
+  <nav class="nav" id="nav">
+    <div class="wrap nav__in">
+      <a href="#about" class="nav__logo">&lt;IDAN_DRUTZ /&gt;</a>
+      <div class="nav__links">
+        <a href="#about">about</a>
+        <a href="#projects">projects</a>
+        <a href="#contact">contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero / Profile Intro -->
+  <section id="about" class="hero">
+    <div class="wrap hero__in">
+
+      <!-- Main Bio -->
+      <div class="hero__main">
+        <div class="badge rv"><span class="badge__dot"></span>Available for work</div>
+
+        <h1 class="hero__name glow"><span class="mask"><span class="mask__in">Idan Drutz</span></span></h1>
+        <p class="hero__role rv">Roblox Developer &amp; Programmer</p>
+
+        <p class="hero__bio rv">
+          I build gameplay systems, mechanics, and tool utilities on Roblox. Most of my work is programmed in <strong>Luau</strong>, <strong>Python</strong>, and <strong>C#</strong>. I also create custom (VFX) and animations on the side whenever a project needs them.
+        </p>
+
+        <!-- Social Action Buttons -->
+        <div class="actions rv">
+          <a href="https://discord.gg/VfwEVSj3mE" target="_blank" rel="noopener" class="btn btn--primary magnetic">discord_server</a>
+
+          <button type="button" class="btn btn--soft magnetic js-copy">
+            <span>copy_tag: idan4k</span>
+            <span class="copied" hidden>Copied</span>
+          </button>
+
+          <a href="https://www.youtube.com/@Devstroyer3000" target="_blank" rel="noopener" class="btn btn--youtube magnetic">youtube</a>
         </div>
-    </nav>
+      </div>
 
-    <!-- Hero / Profile Intro -->
-    <section id="about" class="max-w-4xl mx-auto px-6 pt-16 pb-12">
-        <div class="flex flex-col md:flex-row md:items-start justify-between gap-12">
-            
-            <!-- Main Bio -->
-            <div class="flex-1">
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/5 border border-emerald-500/10 text-emerald-400 text-xs font-mono rounded mb-6">
-                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    Available for work
-                </div>
-                
-                <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">
-                    Idan Drutz
-                </h1>
-                <p class="text-lg text-blue-400 font-mono mt-2">Roblox Developer & Programmer</p>
-                
-                <p class="text-slate-300 leading-relaxed mt-6 text-base">
-                    I build gameplay systems, mechanics, and tool utilities on Roblox. Most of my work is programmed in <strong class="text-white font-semibold">Luau</strong>, <strong class="text-white font-semibold">Python</strong>, and <strong class="text-white font-semibold">C#</strong>. I also create custom (VFX) and animations on the side whenever a project needs them.
-                </p>
+      <!-- Quick Stack Sidebar -->
+      <aside class="stack rv">
+        <p class="stack__title">core_stack</p>
+        <ul>
+          <li>Luau</li>
+          <li>Python</li>
+          <li>C#</li>
+          <li>Roblox Studio</li>
+          <li>VFX &amp; Animation</li>
+        </ul>
+      </aside>
 
-                <!-- Social Action Buttons -->
-                <div class="flex flex-wrap items-center gap-4 mt-8 font-mono text-sm">
-                    <a href="https://discord.gg/VfwEVSj3mE" target="_blank" class="px-4 py-2.5 bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 border border-blue-500/20 rounded transition-all duration-200">
-                        discord_server
-                    </a>
-                    
-                    <button onclick="copyDiscordHandle()" class="px-4 py-2.5 bg-slate-800/40 hover:bg-slate-800/80 text-slate-300 border border-slate-700/30 rounded transition-all duration-200 inline-flex items-center gap-2">
-                        <span>copy_tag: idan4k</span>
-                        <span id="copy-status" class="text-xs text-emerald-400 font-bold hidden">Copied</span>
-                    </button>
+    </div>
 
-                    <a href="https://www.youtube.com/@Devstroyer3000" target="_blank" class="px-4 py-2.5 bg-red-600/10 hover:bg-red-600/20 text-red-400 border border-red-500/20 rounded transition-all duration-200">
-                        youtube
-                    </a>
-                </div>
-            </div>
+    <div class="scrollcue rv" aria-hidden="true"><span>scroll</span><i></i></div>
+  </section>
 
-            <!-- Quick Stack Sidebar -->
-            <div class="w-full md:w-64 p-6 bg-brand-card/30 border border-slate-800/80 rounded-xl font-mono text-xs">
-                <p class="text-slate-500 font-bold uppercase tracking-wider mb-4 border-b border-slate-800/80 pb-2">core_stack</p>
-                <ul class="space-y-2.5 text-slate-300">
-                    <li class="flex items-center gap-2"><span class="text-blue-400">&gt;</span> Luau</li>
-                    <li class="flex items-center gap-2"><span class="text-blue-400">&gt;</span> Python</li>
-                    <li class="flex items-center gap-2"><span class="text-blue-400">&gt;</span> C#</li>
-                    <li class="flex items-center gap-2"><span class="text-blue-400">&gt;</span> Roblox Studio</li>
-                    <li class="flex items-center gap-2"><span class="text-blue-400">&gt;</span> VFX & Animation</li>
-                </ul>
-            </div>
+  <!-- Stack marquee -->
+  <section class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marqueeTrack">
+      <div class="marquee__set">
+        <span>Luau</span><span>Python</span><span>C#</span><span>Roblox Studio</span><span>VFX &amp; Animation</span>
+      </div>
+      <div class="marquee__set">
+        <span>Luau</span><span>Python</span><span>C#</span><span>Roblox Studio</span><span>VFX &amp; Animation</span>
+      </div>
+    </div>
+  </section>
 
+  <!-- About, visual version: same facts as the bio, shown instead of told -->
+  <section class="bento" data-nav="about">
+    <div class="wrap">
+      <div class="bento__head sc">
+        <h2 class="glow">What I do</h2>
+      </div>
+
+      <div class="bento__grid">
+
+        <!-- What I build -->
+        <article class="tile spot tile--build sc">
+          <p class="tile__label">on Roblox</p>
+          <ul class="build">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect pathLength="1" x="2.5" y="6.5" width="19" height="11" rx="4"/><path pathLength="1" d="M8 10v4M6 12h4"/><circle pathLength="1" cx="15.5" cy="11" r=".9"/><circle pathLength="1" cx="18" cy="13.2" r=".9"/></svg>
+              <span>Gameplay systems</span><i>→</i>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M4 7h9M18 7h2M4 17h3M12 17h8"/><circle pathLength="1" cx="15.5" cy="7" r="2.3"/><circle pathLength="1" cx="9.5" cy="17" r="2.3"/></svg>
+              <span>Mechanics</span><i>→</i>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M14.7 6.3a4 4 0 0 0-5 5L3.5 17.5a1.6 1.6 0 0 0 2.3 2.3L12 13.6a4 4 0 0 0 5-5l-2.6 2.6-2.3-.5-.5-2.3z"/></svg>
+              <span>Tool utilities</span><i>→</i>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Written in -->
+        <article class="tile spot tile--lang sc">
+          <p class="tile__label">written in</p>
+          <div class="langs">
+            <div class="lang"><b>Luau</b><code>--!strict<u></u></code></div>
+            <div class="lang"><b>Python</b><code>def main():<u></u></code></div>
+            <div class="lang"><b>C#</b><code>void Start()<u></u></code></div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="counts">
+        <div class="count sc"><b><span data-count="3">3</span></b><em>languages</em></div>
+        <div class="count sc"><b><span data-count="4">4</span></b><em>projects</em></div>
+        <div class="count sc"><b><span data-count="1">1</span></b><em>platform: Roblox</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bridge: the background morphs from nature to cyber while this scrolls -->
+  <section class="bridge" id="bridge">
+    <div class="bridge__sticky">
+
+      <!-- Scroll-driven scenery: everything here moves with --p (0..1 through this section) -->
+      <div class="bridge__rows" aria-hidden="true">
+        <div class="brow brow--a"><span>Luau</span><span>Python</span><span>C#</span><span>Luau</span><span>Python</span><span>C#</span></div>
+        <div class="brow brow--b"><span>Roblox Studio</span><span>VFX &amp; Animation</span><span>Roblox Studio</span><span>VFX &amp; Animation</span></div>
+      </div>
+
+      <div class="bridge__rings" aria-hidden="true">
+        <svg class="ring ring--1" viewBox="-100 -100 200 200">
+          <circle class="n" r="98"/><polygon class="c" points="0,-98 84.9,-49 84.9,49 0,98 -84.9,49 -84.9,-49"/><circle class="dot" cx="0" cy="-98" r="2.6"/>
+        </svg>
+        <svg class="ring ring--2" viewBox="-100 -100 200 200">
+          <circle class="n" r="98"/><polygon class="c" points="0,-98 84.9,-49 84.9,49 0,98 -84.9,49 -84.9,-49"/><circle class="dot" cx="0" cy="98" r="2.6"/><circle class="dot" cx="-84.9" cy="-49" r="1.8"/>
+        </svg>
+        <svg class="ring ring--3" viewBox="-100 -100 200 200">
+          <circle class="n" r="98"/><polygon class="c" points="0,-98 84.9,-49 84.9,49 0,98 -84.9,49 -84.9,-49"/><circle class="dot" cx="84.9" cy="49" r="2.2"/>
+        </svg>
+      </div>
+
+      <div class="bridge__content wrap">
+        <p class="bridge__text" id="bridgeText">I build gameplay systems, mechanics, and tool utilities on Roblox.</p>
+
+        <div class="bridge__foot">
+          <ol class="phases" id="phases">
+            <li><span>01</span>Gameplay systems</li>
+            <li><span>02</span>Mechanics</li>
+            <li><span>03</span>Tool utilities</li>
+          </ol>
         </div>
-    </section>
+      </div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="max-w-4xl mx-auto px-6 py-12">
-        
-        <!-- Section Header with Minimalist Filter Navigation -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-slate-900 gap-4">
-            <div>
-                <h2 class="text-2xl font-bold text-white tracking-tight">Projects</h2>
-                <p class="text-slate-500 text-sm mt-1">Select codebases, utilities, and creative assets.</p>
-            </div>
-            
-            <!-- Minimal filter tabs -->
-            <div class="flex items-center gap-4 font-mono text-xs text-slate-500">
-                <button onclick="filterCategory('all')" id="tab-all" class="text-white border-b-2 border-blue-500 pb-1 font-bold transition">all</button>
-                <button onclick="filterCategory('framework')" id="tab-framework" class="hover:text-white pb-1 transition">frameworks</button>
-                <button onclick="filterCategory('tool')" id="tab-tool" class="hover:text-white pb-1 transition">tools</button>
-                <button onclick="filterCategory('creative')" id="tab-creative" class="hover:text-white pb-1 transition">vfx_art</button>
-            </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <div class="wrap">
+
+      <!-- Section Header with Minimalist Filter Navigation -->
+      <div class="projects__head sc">
+        <div>
+          <h2 class="glow">Projects</h2>
+          <p>Select codebases, utilities, and creative assets.</p>
         </div>
 
-        <!-- Project Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-grid">
-            
-            <!-- Project: UniFramework -->
-            <div class="project-card flex flex-col justify-between bg-brand-card/20 border border-slate-900 rounded-xl p-6 hover:border-slate-800/80 transition-all duration-200" data-category="framework">
-                <div>
-                    <!-- ==========================================
-                         TO ADD AN IMAGE LATER, UNCOMMENT THE LINE BELOW 
-                         ========================================== -->
-                    <!-- <img src="YOUR_IMAGE_LINK_HERE" alt="UniFramework" class="w-full h-40 object-cover rounded-lg mb-4 border border-slate-800/60" /> -->
-                    
-                    <span class="font-mono text-[10px] text-blue-400 uppercase tracking-widest font-bold">Framework</span>
-                    <h3 class="text-lg font-bold text-white mt-1 mb-2">UniFramework</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                        A framework optimized for secure client prediction and server-authoritative logic. Built to handle low-replication events smoothly in busy gameplay environments.
-                    </p>
-                </div>
-                <div class="flex items-center justify-between pt-4 border-t border-slate-900/80 font-mono text-xs">
-                    <span class="text-slate-500">Luau</span>
-                    <a href="https://github.com/idandrutz-MrRandom/UniFramework-AnythingFramework" target="_blank" class="text-blue-400 hover:underline">Repo &rarr;</a>
-                </div>
-            </div>
-
-            <!-- Project: Strictify -->
-            <div class="project-card flex flex-col justify-between bg-brand-card/20 border border-slate-900 rounded-xl p-6 hover:border-slate-800/80 transition-all duration-200" data-category="framework">
-                <div>
-                    <!-- ==========================================
-                         TO ADD AN IMAGE LATER, UNCOMMENT THE LINE BELOW 
-                         ========================================== -->
-                    <!-- <img src="YOUR_IMAGE_LINK_HERE" alt="Strictify" class="w-full h-40 object-cover rounded-lg mb-4 border border-slate-800/60" /> -->
-                    
-                    <span class="font-mono text-[10px] text-blue-400 uppercase tracking-widest font-bold">Roblox Plugin</span>
-                    <h3 class="text-lg font-bold text-white mt-1 mb-2">Strictify</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                        An editor extension utilizing Roblox's HTTP service alongside AI backend models to automatically format and enforce strict Luau type assertions while programming.
-                    </p>
-                </div>
-                <div class="flex items-center justify-between pt-4 border-t border-slate-900/80 font-mono text-xs">
-                    <span class="text-slate-500">Luau</span>
-                    <a href="https://github.com/idandrutz-MrRandom/Strictify" target="_blank" class="text-blue-400 hover:underline">Repo &rarr;</a>
-                </div>
-            </div>
-
-            <!-- Project: Roblox Shortcuts -->
-            <div class="project-card flex flex-col justify-between bg-brand-card/20 border border-slate-900 rounded-xl p-6 hover:border-slate-800/80 transition-all duration-200" data-category="tool">
-                <div>
-                    <!-- ==========================================
-                         TO ADD AN IMAGE LATER, UNCOMMENT THE LINE BELOW 
-                         ========================================== -->
-                    <!-- <img src="YOUR_IMAGE_LINK_HERE" alt="Roblox Shortcuts" class="w-full h-40 object-cover rounded-lg mb-4 border border-slate-800/60" /> -->
-                    
-                    <span class="font-mono text-[10px] text-blue-400 uppercase tracking-widest font-bold">Utility</span>
-                    <h3 class="text-lg font-bold text-white mt-1 mb-2">Roblox Shortcuts</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                        A quick, lightweight desktop utility configuration that creates desktop launchers for specific Roblox places using custom deep-link bindings.
-                    </p>
-                </div>
-                <div class="flex items-center justify-between pt-4 border-t border-slate-900/80 font-mono text-xs">
-                    <span class="text-slate-500">Python</span>
-                    <a href="https://github.com/idandrutz-MrRandom/roblox-Shortcuts" target="_blank" class="text-blue-400 hover:underline">Repo &rarr;</a>
-                </div>
-            </div>
-
-            <!-- Project: Animations & VFX -->
-            <div class="project-card flex flex-col justify-between bg-brand-card/20 border border-slate-900 rounded-xl p-6 hover:border-slate-800/80 transition-all duration-200" data-category="creative">
-                <div>
-                    <!-- ==========================================
-                         TO ADD AN IMAGE LATER, UNCOMMENT THE LINE BELOW 
-                         ========================================== -->
-                    <!-- <img src="YOUR_IMAGE_LINK_HERE" alt="VFX Showcase" class="w-full h-40 object-cover rounded-lg mb-4 border border-slate-800/60" /> -->
-                    
-                    <span class="font-mono text-[10px] text-blue-400 uppercase tracking-widest font-bold">Creative Art</span>
-                    <h3 class="text-lg font-bold text-white mt-1 mb-2">VFX & Animations</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                        Custom vfx and animations. nothing special. im pretty inactive in this space.
-                    </p>
-                </div>
-                <div class="flex items-center justify-between pt-4 border-t border-slate-900/80 font-mono text-xs">
-                    <span class="text-slate-500">Studio / Blender</span>
-                    <a href="https://www.youtube.com/@Devstroyer3000" target="_blank" class="text-blue-400 hover:underline">Channel &rarr;</a>
-                </div>
-            </div>
-
+        <!-- Minimal filter tabs -->
+        <div class="filters" id="filters" role="tablist">
+          <button type="button" class="is-active" data-filter="all">all</button>
+          <button type="button" data-filter="framework">frameworks</button>
+          <button type="button" data-filter="tool">tools</button>
+          <button type="button" data-filter="creative">vfx_art</button>
+          <i class="filters__bar" id="filtersBar"></i>
         </div>
-    </section>
+      </div>
 
-    <!-- Connect / Contact CTA -->
-    <section id="contact" class="max-w-4xl mx-auto px-6 py-20">
-        <div class="border border-slate-900 bg-brand-card/10 rounded-2xl p-8 md:p-12 text-center">
-            <h2 class="text-2xl font-bold text-white tracking-tight mb-3">Start a Project</h2>
-            <p class="text-slate-400 max-w-md mx-auto text-sm leading-relaxed mb-8">
-                If you need help building reliable backends, optimizing networking replication, or creating gameplay visual systems on Roblox, let's talk.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 text-sm font-mono">
-                <a href="https://discord.gg/VfwEVSj3mE" target="_blank" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded font-bold transition duration-200">
-                    join_discord
-                </a>
-                <button onclick="copyDiscordHandle()" class="px-6 py-3 bg-slate-800/50 hover:bg-slate-700/80 text-slate-300 border border-slate-700 rounded font-bold transition duration-200">
-                    copy_handle: idan4k
-                </button>
-            </div>
+      <!-- Project Grid -->
+      <div class="grid" id="projects-grid">
+
+        <!-- Project: UniFramework -->
+        <div class="card sc" data-category="framework">
+          <div>
+            <!-- TO ADD AN IMAGE LATER, UNCOMMENT THE LINE BELOW -->
+            <!-- <img src="YOUR_IMAGE_LINK_HERE" alt="UniFramework" class="card__img" /> -->
+            <div class="card__top"><span class="card__kind">Framework</span><span class="card__num">01</span></div>
+            <h3 class="glow">UniFramework</h3>
+            <p>A framework optimized for secure client prediction and server-authoritative logic. Built to handle low-replication events smoothly in busy gameplay environments.</p>
+          </div>
+          <div class="card__foot">
+            <span>Luau</span>
+            <a href="https://github.com/idandrutz-MrRandom/UniFramework-AnythingFramework" target="_blank" rel="noopener">Repo &rarr;</a>
+          </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="max-w-4xl mx-auto px-6 py-12 border-t border-slate-900/60 text-center font-mono text-xs text-slate-500">
-        <p>© 2026 Idan Drutz. Hosted on GitHub Pages.</p>
-    </footer>
+        <!-- Project: Strictify -->
+        <div class="card sc" data-category="framework">
+          <div>
+            <!-- TO ADD AN IMAGE LATER, UNCOMMENT THE LINE BELOW -->
+            <!-- <img src="YOUR_IMAGE_LINK_HERE" alt="Strictify" class="card__img" /> -->
+            <div class="card__top"><span class="card__kind">Roblox Plugin</span><span class="card__num">02</span></div>
+            <h3 class="glow">Strictify</h3>
+            <p>An editor extension utilizing Roblox's HTTP service alongside AI backend models to automatically format and enforce strict Luau type assertions while programming.</p>
+          </div>
+          <div class="card__foot">
+            <span>Luau</span>
+            <a href="https://github.com/idandrutz-MrRandom/Strictify" target="_blank" rel="noopener">Repo &rarr;</a>
+          </div>
+        </div>
 
-    <!-- Interactive Filter & Copy Script -->
-    <script>
-        function filterCategory(category) {
-            const cards = document.querySelectorAll('.project-card');
-            const tabs = ['all', 'framework', 'tool', 'creative'];
-            
-            tabs.forEach(t => {
-                const tabEl = document.getElementById(`tab-${t}`);
-                if (t === category) {
-                    tabEl.classList.add('text-white', 'border-b-2', 'border-blue-500', 'font-bold');
-                    tabEl.classList.remove('text-slate-500');
-                } else {
-                    tabEl.classList.remove('text-white', 'border-b-2', 'border-blue-500', 'font-bold');
-                    tabEl.classList.add('text-slate-500');
-                }
-            });
+        <!-- Project: Roblox Shortcuts -->
+        <div class="card sc" data-category="tool">
+          <div>
+            <!-- TO ADD AN IMAGE LATER, UNCOMMENT THE LINE BELOW -->
+            <!-- <img src="YOUR_IMAGE_LINK_HERE" alt="Roblox Shortcuts" class="card__img" /> -->
+            <div class="card__top"><span class="card__kind">Utility</span><span class="card__num">03</span></div>
+            <h3 class="glow">Roblox Shortcuts</h3>
+            <p>A quick, lightweight desktop utility configuration that creates desktop launchers for specific Roblox places using custom deep-link bindings.</p>
+          </div>
+          <div class="card__foot">
+            <span>Python</span>
+            <a href="https://github.com/idandrutz-MrRandom/roblox-Shortcuts" target="_blank" rel="noopener">Repo &rarr;</a>
+          </div>
+        </div>
 
-            cards.forEach(card => {
-                card.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'flex';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 50);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 200);
-                }
-            });
-        }
+        <!-- Project: Animations & VFX -->
+        <div class="card sc" data-category="creative">
+          <div>
+            <!-- TO ADD AN IMAGE LATER, UNCOMMENT THE LINE BELOW -->
+            <!-- <img src="YOUR_IMAGE_LINK_HERE" alt="VFX Showcase" class="card__img" /> -->
+            <div class="card__top"><span class="card__kind">Creative Art</span><span class="card__num">04</span></div>
+            <h3 class="glow">VFX &amp; Animations</h3>
+            <p>Custom vfx and animations. nothing special. im pretty inactive in this space.</p>
+          </div>
+          <div class="card__foot">
+            <span>Studio / Blender</span>
+            <a href="https://www.youtube.com/@Devstroyer3000" target="_blank" rel="noopener">Channel &rarr;</a>
+          </div>
+        </div>
 
-        function copyDiscordHandle() {
-            navigator.clipboard.writeText("idan4k").then(() => {
-                const status = document.getElementById('copy-status');
-                status.classList.remove('hidden');
-                setTimeout(() => {
-                    status.classList.add('hidden');
-                }, 2000);
-            }).catch(err => {
-                console.error('Could not copy Discord handle: ', err);
-            });
-        }
-    </script>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connect / Contact CTA -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="cta sc">
+        <h2 class="glow">Start a Project</h2>
+        <p>If you need help building reliable backends, optimizing networking replication, or creating gameplay visual systems on Roblox, let's talk.</p>
+        <div class="cta__btns">
+          <a href="https://discord.gg/VfwEVSj3mE" target="_blank" rel="noopener" class="btn btn--solid magnetic">join_discord</a>
+          <button type="button" class="btn btn--soft magnetic js-copy">
+            <span>copy_handle: idan4k</span>
+            <span class="copied" hidden>Copied</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Playground: run a little Luau, Python or C# -->
+  <section class="play" id="play" data-nav="contact">
+    <div class="wrap">
+      <div class="play__head sc">
+        <h2 class="glow">Run some code</h2>
+        <p>Luau, Python and C#, right here in your browser.</p>
+      </div>
+
+      <div class="play__box sc">
+        <div class="play__bar">
+          <div class="play__tabs" id="pgTabs" role="tablist">
+            <button type="button" role="tab" class="is-active" data-lang="luau">Luau</button>
+            <button type="button" role="tab" data-lang="python">Python</button>
+            <button type="button" role="tab" data-lang="csharp">C#</button>
+          </div>
+          <div class="play__actions">
+            <span class="play__status" id="pgStatus">ready</span>
+            <button type="button" class="play__link" id="pgReset">reset</button>
+            <button type="button" class="play__link play__link--stop" id="pgStop" hidden>stop</button>
+            <button type="button" class="btn btn--solid" id="pgRun">Run &#9654;</button>
+          </div>
+        </div>
+
+        <div class="play__grid">
+          <div class="play__ed">
+            <pre id="pgHl" aria-hidden="true"></pre>
+            <textarea id="pgEditor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Code editor"></textarea>
+          </div>
+          <div class="play__out">
+            <div class="play__outbar">output</div>
+            <div class="play__console" id="pgOut" role="log" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <p class="play__note"><span id="pgNote"></span> <kbd>Ctrl</kbd> + <kbd>Enter</kbd> runs it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__big" aria-hidden="true">IDAN DRUTZ</div>
+    <div class="wrap"><p>© 2026 Idan Drutz. Hosted on GitHub Pages.</p></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/playground.js"></script>
 </body>
 </html>
