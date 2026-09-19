@@ -212,7 +212,8 @@ html.js .build li:nth-child(3) svg * { animation-delay: .3s !important; }
 .lang::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, color-mix(in srgb, var(--accent) 16%, transparent) 50%, transparent 65%); transform: translateX(-130%); transition: transform 1s var(--ease); pointer-events: none; }
 .lang:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
 .lang:hover::after { transform: translateX(130%); }
-.lang b { display: block; font-family: var(--serif); font-weight: 350; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1; letter-spacing: -.03em; margin-bottom: 12px; }
+.lang b { display: block; font-family: var(--serif); font-weight: 350; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1; letter-spacing: -.03em; margin-bottom: 6px; }
+.lang p { font-size: .88rem; color: var(--muted); margin-bottom: 10px; }
 .lang code { font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace; font-size: .85rem; color: var(--accent); }
 .lang u { display: inline-block; width: .55em; height: 1.05em; margin-left: 3px; vertical-align: -.18em; background: var(--accent2); animation: caret 1.05s steps(1) infinite; }
 @keyframes caret { 50% { opacity: 0; } }

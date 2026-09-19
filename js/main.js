@@ -45,7 +45,7 @@
     s.setProperty('--bg', `rgb(${bg})`);
     s.setProperty('--bg-rgb', bg.join(', '));
     cyberLayer.style.opacity = t;
-    overlay.style.opacity = lerp(.3, .5, t);
+    overlay.style.opacity = lerp(.3, .62, t);
     particleColors = [a, b];
   };
 
