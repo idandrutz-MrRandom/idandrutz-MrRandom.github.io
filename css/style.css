@@ -130,6 +130,8 @@ html:not(.js) .preloader { display: none; }
 .hero__name { font-family: var(--serif); font-weight: 350; font-size: clamp(3.8rem, 11vw, 8.5rem); line-height: 1; letter-spacing: -.035em; }
 .hero__name .ch { display: inline-block; will-change: transform; }
 .hero__role { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(1.3rem, 2.6vw, 1.95rem); color: var(--accent2); margin-top: 12px; }
+.hero__aka { margin-top: 10px; font-size: .92rem; color: var(--faint); }
+.hero__aka b, .cta__aka b { color: var(--fg); font-weight: 500; }
 .hero__bio { margin-top: 30px; max-width: 580px; font-size: 1.08rem; color: var(--muted); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
 
@@ -336,6 +338,8 @@ html.js .phases li { opacity: .5; }
 @keyframes spin { to { --ang: 360deg; } }
 .cta h2 { font-size: clamp(2.8rem, 8vw, 6.2rem); }
 .cta p { max-width: 480px; margin: 18px auto 36px; color: var(--muted); }
+.cta .cta__aka { margin: -14px auto 30px; font-size: .88rem; color: var(--faint); }
+.footer__aka { margin-bottom: 4px; letter-spacing: .06em; }
 .cta__btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
 
 .footer { position: relative; padding: 0 0 36px; text-align: center; font-size: .82rem; color: var(--faint); overflow: hidden; }
